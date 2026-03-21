@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <header className={`header ${isScrolled ? 'scroll-header' : ''}`} id="header">
       <nav className="nav container">
-        <NavLink to="/" className="nav__logo" onClick={() => setIsMenuOpen(false)}>BARBORSHOP</NavLink>
+        <NavLink to="/" className="nav__logo" onClick={() => setIsMenuOpen(false)}>BARBERSHOP</NavLink>
 
         <div className={`nav__menu ${isMenuOpen ? 'show-menu' : ''}`} id="nav-menu">
           <ul className="nav__list">

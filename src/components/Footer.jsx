@@ -43,7 +43,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <small className="footer__copy">&#169; All Rights Reserved By Barborshop</small>
+      <small className="footer__copy">&#169; All Rights Reserved By Barbershop</small>
     </footer>
   );
 };
