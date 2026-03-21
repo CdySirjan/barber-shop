@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -6,6 +6,50 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
   const containerRef = useRef(null);
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (errors[e.target.name]) {
+      setErrors({ ...errors, [e.target.name]: '' });
+    }
+  };
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = 'Name cannot be empty';
+    
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email cannot be empty';
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number cannot be empty';
+    } else if (!/^98\d{8}$/.test(formData.phone)) {
+      newErrors.phone = 'Phone must be exactly 10 digits and start with 98';
+    }
+    
+    if (!formData.message.trim()) newErrors.message = 'Message cannot be empty';
+    
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      alert('Message sent successfully!');
+      setShowForm(false);
+      setFormData({ name: '', email: '', phone: '', message: '' });
+      setErrors({});
+    }
+  };
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
@@ -31,7 +75,42 @@ const Contact = () => {
           <p className="contact__description">
             Contact us for a barber service, find us at our nearest location, or write to us through our social media links and book now.
           </p>
-          <a href="https://www.whatsapp.com/" target="_blank" className="button">Book Via WhatsApp</a>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
+            <button className="button" onClick={() => setShowForm(!showForm)} style={{ cursor: 'pointer', width: '220px', justifyContent: 'center' }}>
+              {showForm ? 'Close Form' : 'Send us a Message'}
+            </button>
+            <a href="https://wa.me/9779845764598" target="_blank" rel="noreferrer" className="button" style={{ backgroundColor: '#25D366', color: '#fff', width: '220px', justifyContent: 'center' }}>
+              <i className="ri-whatsapp-fill" style={{ marginRight: '0.5rem', fontSize: '1.25rem' }}></i> Book Via WhatsApp
+            </a>
+          </div>
+
+          {showForm && (
+            <form className="contact__form" style={{ marginTop: '2rem', textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '1rem', background: 'var(--beige-color-light)', padding: '2rem', borderRadius: '1.5rem', width: '100%', animation: 'fadeIn 0.4s ease-out' }} onSubmit={handleSubmit} noValidate>
+              <div className="contact__form-div">
+                <label className="contact__form-tag" style={{ display: 'block', fontSize: '14px', marginBottom: '0.5rem', color: 'var(--title-color)', fontWeight: 'var(--font-medium)' }}>Name</label>
+                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Insert your name" className="contact__form-input" style={{ width: '100%', padding: '1rem', borderRadius: '0.5rem', border: `1px solid ${errors.name ? 'red' : 'var(--border-color)'}`, background: 'var(--body-color)', color: 'var(--text-color)', outline: 'none' }} />
+                {errors.name && <span style={{ color: 'red', fontSize: '12px', marginTop: '0.25rem', display: 'block' }}>{errors.name}</span>}
+              </div>
+              <div className="contact__form-div">
+                <label className="contact__form-tag" style={{ display: 'block', fontSize: '14px', marginBottom: '0.5rem', color: 'var(--title-color)', fontWeight: 'var(--font-medium)' }}>Email</label>
+                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Insert your email" className="contact__form-input" style={{ width: '100%', padding: '1rem', borderRadius: '0.5rem', border: `1px solid ${errors.email ? 'red' : 'var(--border-color)'}`, background: 'var(--body-color)', color: 'var(--text-color)', outline: 'none' }} />
+                {errors.email && <span style={{ color: 'red', fontSize: '12px', marginTop: '0.25rem', display: 'block' }}>{errors.email}</span>}
+              </div>
+              <div className="contact__form-div">
+                <label className="contact__form-tag" style={{ display: 'block', fontSize: '14px', marginBottom: '0.5rem', color: 'var(--title-color)', fontWeight: 'var(--font-medium)' }}>Phone Number</label>
+                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Insert your phone number" className="contact__form-input" style={{ width: '100%', padding: '1rem', borderRadius: '0.5rem', border: `1px solid ${errors.phone ? 'red' : 'var(--border-color)'}`, background: 'var(--body-color)', color: 'var(--text-color)', outline: 'none' }} />
+                {errors.phone && <span style={{ color: 'red', fontSize: '12px', marginTop: '0.25rem', display: 'block' }}>{errors.phone}</span>}
+              </div>
+              <div className="contact__form-div contact__form-area">
+                <label className="contact__form-tag" style={{ display: 'block', fontSize: '14px', marginBottom: '0.5rem', color: 'var(--title-color)', fontWeight: 'var(--font-medium)' }}>Message</label>
+                <textarea name="message" value={formData.message} onChange={handleChange} cols="30" rows="5" placeholder="Write your message" className="contact__form-input" style={{ width: '100%', padding: '1rem', borderRadius: '0.5rem', border: `1px solid ${errors.message ? 'red' : 'var(--border-color)'}`, background: 'var(--body-color)', color: 'var(--text-color)', outline: 'none', resize: 'none' }}></textarea>
+                {errors.message && <span style={{ color: 'red', fontSize: '12px', marginTop: '0.25rem', display: 'block' }}>{errors.message}</span>}
+              </div>
+              <button type="submit" className="button" style={{ alignSelf: 'flex-start', cursor: 'pointer', marginTop: '1rem', width: '100%', justifyContent: 'center' }}>
+                Send Message
+              </button>
+            </form>
+          )}
         </div>
 
         <div className="contact__map">
