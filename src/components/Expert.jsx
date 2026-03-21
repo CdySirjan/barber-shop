@@ -1,4 +1,11 @@
+import { useLayoutEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 const Expert = () => {
+  const containerRef = useRef(null);
   const experts = [
     { img: 1, name: 'John Doe', role: 'Senior Barber' },
     { img: 2, name: 'Mike Johnson', role: 'Master Barber' },
@@ -6,8 +13,22 @@ const Expert = () => {
     { img: 4, name: 'Max Well', role: 'Master Barber' }
   ];
 
+  useLayoutEffect(() => {
+    let ctx = gsap.context(() => {
+      const reveal = (selector, options = {}) => {
+        gsap.from(selector, { scrollTrigger: selector, opacity: 0, duration: 1, y: 100, delay: 0.3, ease: 'power2.out', ...options });
+      };
+
+      reveal('.expert .section__title', {});
+      reveal('.expert__description', { delay: 0.6 });
+      reveal('.expert__card', { delay: 0.9, stagger: 0.2 });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="expert section" id="expert">
+    <section className="expert section" id="expert" ref={containerRef}>
       <div className="expert__container container grid">
         <div>
           <h2 className="section__title">MEET OUR BARBERS</h2>

@@ -1,6 +1,30 @@
+import { useLayoutEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 const Contact = () => {
+  const containerRef = useRef(null);
+
+  useLayoutEffect(() => {
+    let ctx = gsap.context(() => {
+      const reveal = (selector, options = {}) => {
+        gsap.from(selector, { scrollTrigger: selector, opacity: 0, duration: 1, y: 100, delay: 0.3, ease: 'power2.out', ...options });
+      };
+
+      reveal('.contact__data .section__title', {});
+      reveal('.contact__description', { delay: 0.6 });
+      reveal('.contact__data .button', { delay: 0.9, y: 0, scale: 0 });
+      reveal('.contact__map', { delay: 0.9 });
+      reveal('.contact__card', { delay: 1.2, stagger: 0.2 });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="contact section" id="contact">
+    <section className="contact section" id="contact" ref={containerRef}>
       <div className="contact__container container grid">
         <div className="contact__data">
           <h2 className="section__title">CONTACT US <br /> FOR A HAIRCUT</h2>

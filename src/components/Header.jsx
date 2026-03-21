@@ -1,44 +1,36 @@
 import { useEffect, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY >= 50);
-
-      const sections = document.querySelectorAll('section[id]');
-      const scrollY = window.scrollY;
-
-      sections.forEach((section) => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 50;
-        const sectionId = section.getAttribute('id');
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-          setActiveSection(sectionId);
-        }
-      });
     };
+
+    // Check immediately in case layout shifted or scroll retained
+    handleScroll();
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   return (
     <header className={`header ${isScrolled ? 'scroll-header' : ''}`} id="header">
       <nav className="nav container">
-        <a href="#" className="nav__logo">BARBORSHOP</a>
+        <NavLink to="/" className="nav__logo" onClick={() => setIsMenuOpen(false)}>BARBORSHOP</NavLink>
 
         <div className={`nav__menu ${isMenuOpen ? 'show-menu' : ''}`} id="nav-menu">
           <ul className="nav__list">
-            <li><a href="#home" className={`nav__link ${activeSection === 'home' ? 'active-link' : ''}`} onClick={() => setIsMenuOpen(false)}>Home</a></li>
-            <li><a href="#about" className={`nav__link ${activeSection === 'about' ? 'active-link' : ''}`} onClick={() => setIsMenuOpen(false)}>About</a></li>
-            <li><a href="#work" className={`nav__link ${activeSection === 'work' ? 'active-link' : ''}`} onClick={() => setIsMenuOpen(false)}>Work</a></li>
-            <li><a href="#expert" className={`nav__link ${activeSection === 'expert' ? 'active-link' : ''}`} onClick={() => setIsMenuOpen(false)}>Experts</a></li>
-            <li><a href="#contact" className={`nav__link ${activeSection === 'contact' ? 'active-link' : ''}`} onClick={() => setIsMenuOpen(false)}>Contact us</a></li>
+            <li><NavLink to="/" className={({isActive}) => `nav__link ${isActive ? 'active-link' : ''}`} onClick={() => setIsMenuOpen(false)}>Home</NavLink></li>
+            <li><NavLink to="/about" className={({isActive}) => `nav__link ${isActive ? 'active-link' : ''}`} onClick={() => setIsMenuOpen(false)}>About</NavLink></li>
+            <li><NavLink to="/work" className={({isActive}) => `nav__link ${isActive ? 'active-link' : ''}`} onClick={() => setIsMenuOpen(false)}>Work</NavLink></li>
+            <li><NavLink to="/services" className={({isActive}) => `nav__link ${isActive ? 'active-link' : ''}`} onClick={() => setIsMenuOpen(false)}>Services</NavLink></li>
+            <li><NavLink to="/expert" className={({isActive}) => `nav__link ${isActive ? 'active-link' : ''}`} onClick={() => setIsMenuOpen(false)}>Experts</NavLink></li>
+            <li><NavLink to="/contact" className={({isActive}) => `nav__link ${isActive ? 'active-link' : ''}`} onClick={() => setIsMenuOpen(false)}>Contact us</NavLink></li>
           </ul>
 
           <button className="nav__close" id="nav-close" onClick={() => setIsMenuOpen(false)}>
