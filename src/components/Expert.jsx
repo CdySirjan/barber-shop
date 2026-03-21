@@ -7,10 +7,10 @@ gsap.registerPlugin(ScrollTrigger);
 const Expert = () => {
   const containerRef = useRef(null);
   const experts = [
-    { img: 1, name: 'John Doe', role: 'Senior Barber' },
-    { img: 2, name: 'Mike Johnson', role: 'Master Barber' },
-    { img: 3, name: 'Jane Smith', role: 'Senior Stylist' },
-    { img: 4, name: 'Max Well', role: 'Master Barber' }
+    { img: 1, name: 'Aarav Sharma', role: 'Senior Barber' },
+    { img: 2, name: 'Suman Thapa', role: 'Master Barber' },
+    { img: 3, name: 'Rohan Gurung', role: 'Senior Stylist' },
+    { img: 4, name: 'Prakash Karki', role: 'Master Barber' }
   ];
 
   useLayoutEffect(() => {

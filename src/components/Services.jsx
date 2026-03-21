@@ -42,7 +42,19 @@ const Services = () => {
               <p className="service__testimonial-description" style={{ marginBottom: '4.5rem', color: 'var(--title-color)', fontWeight: 500, lineHeight: 1.6 }}>
                 Excellent barbershop; the atmosphere feels authentic from the moment you walk in. The service is professional, and the results are top-notch. Definitely a place you'll always want to return to.
               </p>
-              <h3 className="service__testimonial-name" style={{ fontWeight: 700, color: 'var(--title-color)', fontSize: '1.25rem' }}>John D.</h3>
+              <h3 className="service__testimonial-name" style={{ fontWeight: 700, color: 'var(--title-color)', fontSize: '1.25rem' }}>Ram Pariyar</h3>
+            </SwiperSlide>
+            <SwiperSlide className="service__testimonial">
+              <p className="service__testimonial-description" style={{ marginBottom: '4.5rem', color: 'var(--title-color)', fontWeight: 500, lineHeight: 1.6 }}>
+                The best haircut experience I've had in years. The attention to detail is unmatched, and I always leave feeling fresh and confident for my next match.
+              </p>
+              <h3 className="service__testimonial-name" style={{ fontWeight: 700, color: 'var(--title-color)', fontSize: '1.25rem' }}>Paras Khadka</h3>
+            </SwiperSlide>
+            <SwiperSlide className="service__testimonial">
+              <p className="service__testimonial-description" style={{ marginBottom: '4.5rem', color: 'var(--title-color)', fontWeight: 500, lineHeight: 1.6 }}>
+                Great place, great people! They perfectly understand the style I want and the service is extremely professional. Highly recommended for a perfect look.
+              </p>
+              <h3 className="service__testimonial-name" style={{ fontWeight: 700, color: 'var(--title-color)', fontSize: '1.25rem' }}>Rohit Paudel</h3>
             </SwiperSlide>
           </Swiper>
 
@@ -59,23 +71,23 @@ const Services = () => {
           <ul className="service__prices" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
             <li className="service__plan" style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
               <h3 className="service__name" style={{ fontSize: '1rem', fontWeight: 600 }}>ADULT HAIRCUT</h3>
-              <p className="service__price" style={{ fontWeight: 600 }}>$40</p>
+              <p className="service__price" style={{ fontWeight: 600 }}>NRS 150</p>
             </li>
             <li className="service__plan" style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
               <h3 className="service__name" style={{ fontSize: '1rem', fontWeight: 600 }}>CHILDREN HAIRCUT</h3>
-              <p className="service__price" style={{ fontWeight: 600 }}>$20</p>
+              <p className="service__price" style={{ fontWeight: 600 }}>NRS 100</p>
             </li>
             <li className="service__plan" style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
               <h3 className="service__name" style={{ fontSize: '1rem', fontWeight: 600 }}>NECK SHAVE</h3>
-              <p className="service__price" style={{ fontWeight: 600 }}>$35</p>
+              <p className="service__price" style={{ fontWeight: 600 }}>NRS 50</p>
             </li>
             <li className="service__plan" style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
               <h3 className="service__name" style={{ fontSize: '1rem', fontWeight: 600 }}>BEARD TRIM</h3>
-              <p className="service__price" style={{ fontWeight: 600 }}>$15</p>
+              <p className="service__price" style={{ fontWeight: 600 }}>NRS 100</p>
             </li>
             <li className="service__plan" style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
               <h3 className="service__name" style={{ fontSize: '1rem', fontWeight: 600 }}>HAIRCUT + SHAVE</h3>
-              <p className="service__price" style={{ fontWeight: 600 }}>$70</p>
+              <p className="service__price" style={{ fontWeight: 600 }}>NRS 200</p>
             </li>
           </ul>
         </div>

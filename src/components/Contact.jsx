@@ -74,7 +74,7 @@ const Contact = () => {
               <h3 className="contact__title">CALL US AND BOOK</h3>
               <address className="contact__address" style={{ fontStyle: 'normal' }}>
                 <a href="tel:+9779845764598" style={{ display: 'block' }}>+977 9845764598</a>
-                <a href="tel:+9779845761905" style={{ display: 'block' }}>+977 9845761905</a>
+                <a href="tel:+9779845761905" style={{ display: 'block' }}>+977 9845769905</a>
               </address>
             </div>
           </article>
